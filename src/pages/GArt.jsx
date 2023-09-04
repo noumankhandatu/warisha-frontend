@@ -33,10 +33,11 @@ const GArt = () => {
   };
 
   // speech started (this is a pkg)
-  const { error, interimResult, isRecording, results, startSpeechToText, stopSpeechToText } = useSpeechToText({
-    continuous: true,
-    useLegacyResults: false,
-  });
+  const { error, interimResult, isRecording, results, startSpeechToText, stopSpeechToText } =
+    useSpeechToText({
+      continuous: true,
+      useLegacyResults: false,
+    });
 
   if (error) return <p>Web Speech API is not available in this browser 🤷‍</p>;
   // speech end
@@ -46,7 +47,10 @@ const GArt = () => {
   const lastItem = lastIndex[lastIndex.length - 1];
   // speech ended
   let SendingPrompt = JSON.stringify({ inputVal: inputVal, getSelectState: getSelectState });
-  let voiceData = JSON.stringify({ inputVal: lastItem || lastIndex[0], getSelectState: getSelectState });
+  let voiceData = JSON.stringify({
+    inputVal: lastItem || lastIndex[0],
+    getSelectState: getSelectState,
+  });
 
   const handleClick = async () => {
     setSpin(true);
@@ -120,7 +124,9 @@ const GArt = () => {
             {/* speech end */}
             {/* we have to find the last index and put it in input then in request */}
             <TextField
-              value={lastItem !== undefined && lastIndex !== "" ? lastItem || lastIndex[0] : inputVal}
+              value={
+                lastItem !== undefined && lastIndex !== "" ? lastItem || lastIndex[0] : inputVal
+              }
               label="Enter your text"
               variant="filled"
               style={{
@@ -135,7 +141,11 @@ const GArt = () => {
               name="input"
             />
             <Tooltip title="Size of Image" placement="top">
-              <Select style={{ borderStartStartRadius: "0px" }} onChange={handleSelectChange} sx={{ background: "#27C3E3" }}>
+              <Select
+                style={{ borderStartStartRadius: "0px" }}
+                onChange={handleSelectChange}
+                sx={{ background: "#27C3E3" }}
+              >
                 <MenuItem value={"256x256"}>256px</MenuItem>
                 <MenuItem value={"512x512"}>512px</MenuItem>
                 <MenuItem value={"1024x1024"}>1024px</MenuItem>
@@ -169,7 +179,12 @@ const GArt = () => {
             {/* speech end */}
           </div>
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Button onClick={handleClick} sx={{ width: "90vh" }} variant="contained" style={{ backgroundColor: "rgb(39, 195, 227)" }}>
+            <Button
+              onClick={handleClick}
+              sx={{ width: "90vh" }}
+              variant="contained"
+              style={{ backgroundColor: "rgb(39, 195, 227)" }}
+            >
               Generate Image
             </Button>
           </Box>
@@ -183,8 +198,17 @@ const GArt = () => {
                 {img.map((items, id) => {
                   return (
                     <div style={{ position: "relative" }} key={id}>
-                      <Box component={LazyLoadImage} src={items.url} effect="blur" placeholderSrc={theCat} sx={{ width: "100%" }} />
-                      <Tooltip title="Download Image" sx={{ position: "absolute", zIndex: 9999, right: "0px", top: 0 }}>
+                      <Box
+                        component={LazyLoadImage}
+                        src={items.url}
+                        effect="blur"
+                        placeholderSrc={theCat}
+                        sx={{ width: "100%" }}
+                      />
+                      <Tooltip
+                        title="Download Image"
+                        sx={{ position: "absolute", zIndex: 9999, right: "0px", top: 0 }}
+                      >
                         {/* <a download="image.jpg" href={items.url} title="ImageName">
                           <img alt="ImageName" src={items.url} width="100px" />
                         </a> */}
@@ -207,7 +231,10 @@ const GArt = () => {
                           </a>
                         </IconButton>
                       </Tooltip>
-                      <Tooltip title="Print Image" sx={{ position: "absolute", zIndex: 9999, right: "0px", top: 40 }}>
+                      <Tooltip
+                        title="Print Image"
+                        sx={{ position: "absolute", zIndex: 9999, right: "0px", top: 40 }}
+                      >
                         <IconButton>
                           <LocalPrintshopIcon
                             onClick={() => alert("Device isnt available or connected")}
@@ -239,7 +266,11 @@ const GArt = () => {
           )}
           {img ? (
             <Box sx={{ textAlign: "center", mt: 3 }}>
-              <Button variant="contained" onClick={handleCollections} style={{ backgroundColor: "rgb(39, 195, 227)" }}>
+              <Button
+                variant="contained"
+                onClick={handleCollections}
+                style={{ backgroundColor: "rgb(39, 195, 227)" }}
+              >
                 Save
               </Button>
             </Box>

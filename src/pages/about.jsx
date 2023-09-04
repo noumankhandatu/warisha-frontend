@@ -2,7 +2,7 @@ import styles from "../style";
 import logo from "../assets/splash/aboutimage.png";
 import FileSaver, { saveAs } from "file-saver";
 import { Link } from "react-router-dom";
-import pdf from "../../public/documentation.pdf";
+// import pdf from "../../public/documentation.pdf";
 
 const About = () => {
   const handleDownload = () => {
@@ -23,7 +23,8 @@ const About = () => {
         <div className="flex flex-row justify-between items-center w-full">
           <h1 className="flex-1 font-poppins font-semibold ss:text-[42px] text-[52px] text-white ss:leading-[100.8px] leading-[75px]">
             About Us
-            <br className="sm:block hidden" /> <span className="text-gradient"> Automated Text-to-Image </span>{" "}
+            <br className="sm:block hidden" />{" "}
+            <span className="text-gradient"> Automated Text-to-Image </span>{" "}
           </h1>
         </div>
 
@@ -31,8 +32,9 @@ const About = () => {
           Generator
         </h1>
         <p className={`${styles.paragraph} max-w-[470px] mt-5`}>
-          Our mission is to provide the best platform for creating realistic art images by writing prompts in natural language within a few seconds
-          and generated in a high-quality image resolution.
+          Our mission is to provide the best platform for creating realistic art images by writing
+          prompts in natural language within a few seconds and generated in a high-quality image
+          resolution.
         </p>
         <button
           onClick={handleDownload}

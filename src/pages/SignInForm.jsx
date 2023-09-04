@@ -18,21 +18,23 @@ const SignInForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // const response = await axios.post(`${baseUrl}/signin`, getVal);
-    const response = await baseUrl.post("/signin", getVal).catch((err) => {
-      console.log("error");
-    });
-    if (response) {
-      alert(response.data.message);
-      const jwtToken = response.data.token;
-      if (jwtToken && jwtToken !== undefined && jwtToken !== null) {
-        localStorage.setItem("jwtToken", jwtToken);
-        navigate("/home");
-        window.location.reload();
+    try {
+      const response = await baseUrl.post("/signin", getVal);
+      if (response) {
+        alert(response.data.message);
+        const jwtToken = response.data.token;
+        if (jwtToken && jwtToken !== undefined && jwtToken !== null) {
+          localStorage.setItem("jwtToken", jwtToken);
+          navigate("/home");
+          window.location.reload();
+        }
+      } else {
+        console.log("No response");
       }
-    }
-    if (!response) {
-      console.log("no response");
+    } catch (error) {
+      console.error("An error occurred during sign-in:", error);
+      // Handle the error here or display an error message to the user
+      alert("Please try again later internet issue");
     }
   };
 
@@ -44,7 +46,14 @@ const SignInForm = () => {
           <label className="formFieldLabel" htmlFor="email">
             E-Mail Address
           </label>
-          <input onChange={(e) => handleChange(e)} type="email" id="email" className="formFieldInput" placeholder="Enter your email" name="email" />
+          <input
+            onChange={(e) => handleChange(e)}
+            type="email"
+            id="email"
+            className="formFieldInput"
+            placeholder="Enter your email"
+            name="email"
+          />
         </div>
         <div className="formField">
           <label className="formFieldLabel" htmlFor="password">
